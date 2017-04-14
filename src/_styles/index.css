@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+* {
+  font-family: 'Roboto', sans-serif;
+}
+
+.D3Charts {
+  width: 50%;
+  float: right;
+}
+
+.ReactCharts {
+  width: 50%;
+  float: left;
+}
