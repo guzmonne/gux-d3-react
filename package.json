@@ -8,6 +8,7 @@
   },
   "homepage": "https://guzmonne.github.io/gux-d3-react",
   "dependencies": {
+    "chance": "^1.0.6",
     "d3": "^4.7.4",
     "lodash": "^4.17.4",
     "prop-types": "^15.5.8",

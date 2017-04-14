@@ -16,8 +16,6 @@ class D3Line extends React.Component {
   }
 
   draw = () => {
-    console.log('draw')
-
     const {
       data,
       pathClassName,

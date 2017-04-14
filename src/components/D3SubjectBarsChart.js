@@ -28,10 +28,7 @@ const D3SubjectBarsChart = ({data}) => (
 )
 
 D3SubjectBarsChart.propTypes = {
-  data: T.arrayOf(T.shape({
-    subject: T.string.isRequired,
-    score: T.number.isRequired,
-  }))
+  data: T.array
 }
 
 export default D3SubjectBarsChart
