@@ -15,7 +15,6 @@ class D3Circles extends React.Component {
   draw = () => {
     const {
       data,
-      height,
       xScale,
       yScale,
       zScale,
@@ -30,23 +29,24 @@ class D3Circles extends React.Component {
       fillOpacity,
       textAnchor,
       textFill,
+      textSize,
       textY,
     } = this.props
 
     this.circles = (
       d3.select(this.container)
-      .selectAll('.' + circleClassName)
+      .selectAll('.' + circleContainerClassName)
       .data(data)
       .enter()
       .append('g')
-      .attr('class', circleClassName)
+      .attr('class', circleContainerClassName)
       .attr('transform', d => `translate(${
         xScale(xAccesor(d))
       }, ${
         yScale(yAccesor(d))
       })`)
     )
-
+    // Circles
     this.circles
     .append('circle')
     .attr('class', circleClassName)
@@ -55,13 +55,14 @@ class D3Circles extends React.Component {
     .attr('r', d => zScale(zAccesor(d)))
     .attr('fill', fill)
     .attr('fill-opacity', fillOpacity)
-
+    // Labels
     this.circles
     .append('text')
     .attr('class', textClassName)    
     .attr('text-anchor', textAnchor)
-    .attr('fill', textfill)
+    .attr('fill', textFill)
     .attr('y', textY)
+    .attr('font-size', textSize)
     .text(labelAccesor)
   }
 
@@ -93,6 +94,7 @@ D3Circles.propTypes = {
   textAnchor: T.string,
   textFill: T.string,
   textY: T.number,
+  textSize: T.number,
 }
 
 D3Circles.defaultProps = {
@@ -105,6 +107,7 @@ D3Circles.defaultProps = {
   textAnchor: 'middle',
   textFill: 'black',
   textY: 2,
+  textSize: 6,
 }
 
 export default D3Circles

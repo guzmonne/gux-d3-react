@@ -92,7 +92,7 @@ class Chart extends React.Component {
     const max = maxRange !== undefined 
                 ? maxRange 
                 : d3.max(this.props.data, this.accesorFor(axis))
-    
+
     return (
       d3.scaleLinear()
       .domain([min, max])
@@ -155,7 +155,7 @@ class Chart extends React.Component {
     const xScale = this.createScale('x', xScaleType, xScaleOptions)
     const yScale = this.createScale('y', yScaleType, yScaleOptions)
     const zScale = this.createScale('z', zScaleType, zScaleOptions)
-    
+
     return (
       <div className="rd3__chart"
         id={this.id}
@@ -171,12 +171,13 @@ class Chart extends React.Component {
           <g className="rd3__chart-svg-body"
             transform={`translate(${m.left}, ${m.top})`} ref={c => this.body = c}
           >
-          {(isArray(children) ? children : [children]).map((child) => (
+          {this.container &&
+          (isArray(children) ? children : [children]).map((child, i) => (
             React.cloneElement(
               child, 
               Object.assign(
                 {},
-                {key: uniqueId('chart-element')},
+                {key: i},
                 this.props,
                 this.state,
                 {

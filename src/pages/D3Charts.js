@@ -1,17 +1,16 @@
 import React from 'react'
 import Chance from 'chance'
-import range from 'lodash/range'
 import D3SubjectBarsChart from '../components/D3SubjectBarsChart.js'
 import D3CountryCirclesChart from '../components/D3CountryCirclesChart.js'
 import D3StocksLineChart from '../components/D3StocksLineChart.js'
 import D3StocksAreaChart from '../components/D3StocksAreaChart.js'
-import {subjectData, countriesData, stocksData} from '../data.js'
+import {countriesData, stocksData} from '../data.js'
 
 const chance = new Chance()
 
 class D3Charts extends React.Component {
   state = {
-    subjectData
+    subjectData: []
   }
 
   componentWillMount() {
@@ -25,9 +24,18 @@ class D3Charts extends React.Component {
   )
   
   randomSubjectData = () => (
-    range(0, chance.d10()).map(d => ({
-      subject: chance.word(),
-      score: chance.d4() > 1 ? chance.d100() : null,
+    [
+      'Calculus',
+      'Science',
+      'Philosophy',
+      'English',
+      'Physics',
+      'Algebra',
+      'Spanish',
+      'Chemistry'
+    ].slice(0, chance.d8()).map(subject => ({
+      subject,
+      score: chance.d4() > 1 ? chance.d100() : 0,
     }))
   )
 

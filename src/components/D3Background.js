@@ -22,12 +22,15 @@ class D3Background extends React.Component {
       stroke,
     } = this.props
 
-    d3.select(this.container)
-    .append('rect')
-      .attr('width', width)
-      .attr('height', height)
-      .attr('fill', fill)
-      .attr('stroke', stroke)
+    //if (this.rect) return
+
+    this.rect = (
+      (this.rect || d3.select(this.container).append('rect'))
+        .attr('width', width)
+        .attr('height', height)
+        .attr('fill', fill)
+        .attr('stroke', stroke)
+    )
   }
 
   render() {

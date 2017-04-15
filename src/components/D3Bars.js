@@ -1,5 +1,6 @@
 import React from 'react'
 import T from 'prop-types'
+import {DELAY} from '../variables.js'
 
 const d3 = Object.assign({}, 
   require('d3-selection'),
@@ -28,44 +29,41 @@ class D3Bars extends React.Component {
       fill,
     } = this.props
 
-    const DELAY = 1000
-
-    const svg = d3.select(this.container)
-
     const t = d3.transition().duration(DELAY)
-      
-    const update = (
-      svg
-      .selectAll('rect')
-      .data(data.filter(d => xAccesor(d)), xAccesor)
-    )
 
-    update
-      .exit()
+    const bars = (
+      d3.select(this.container)
+      .selectAll('.' + barClassName)
+      .data(data, xAccesor)
+    )
+    // Exit
+    bars.exit()
       .transition(t)
       .attr('y', height)
       .attr('height', 0)
       .remove()
-
-    update
+    // Update
+    bars
       .transition(t)
-      .delay(DELAY)
       .attr('y', d => yScale(yAccesor(d)))
       .attr('height', d => height - yScale(yAccesor(d)))
-
-    update  
-      .enter()
-      .append('rect')
-      .attr('class', barClassName)
-      .attr('fill', fill)
       .attr('x', d => xScale(xAccesor(d)))
       .attr('width', d => barWidth 
                         ? barWidth(d) 
                         : xScale.bandwidth && xScale.bandwidth())
+    // Enter
+    bars  
+      .enter()
+      .append('rect')
+      .attr('class', barClassName)
       .attr('y', height)
       .attr('height', 0)
+      .attr('x', d => xScale(xAccesor(d)))
+      .attr('width', d => barWidth 
+                        ? barWidth(d) 
+                        : xScale.bandwidth && xScale.bandwidth())
+      .attr('fill', fill)
       .transition(t)
-//      .delay(update.exit().size() ? 2 * DELAY : 0)
       .attr('y', d => yScale(yAccesor(d)))
       .attr('height', d => height - yScale(yAccesor(d)))
   }

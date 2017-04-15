@@ -1,9 +1,11 @@
 import React from 'react'
 import T from 'prop-types'
+import {DELAY} from '../variables.js'
 
 const d3 = Object.assign({}, 
   require('d3-selection'),
-  require('d3-axis')
+  require('d3-axis'),
+  require('d3-transition')
 )
 
 class D3YAxis extends React.Component {
@@ -12,7 +14,7 @@ class D3YAxis extends React.Component {
   }
 
   componentDidUpdate() {
-    this.draw()
+    this.redraw()
   }
 
   draw = () => {
@@ -34,6 +36,33 @@ class D3YAxis extends React.Component {
     )
 
     d3.select(this.container)
+    .call(this.axis)
+    .selectAll('text')
+    .style('text-anchor', textAnchor)
+    .attr('font-size', textSize + 'px')
+    .attr('transform', `rotate(${textAngle})`)
+  }
+
+  redraw = () => {
+    const {
+      yScale,
+      ticks,
+      tickSize,
+      tickPadding,
+      textAnchor,
+      textAngle,
+      textSize,
+    } = this.props
+
+    this.axis = (
+      d3.axisLeft(yScale)
+      .ticks(ticks)
+      .tickSize(tickSize)
+      .tickPadding(tickPadding)
+    )
+
+    d3.select(this.container)
+    .transition(d3.transition().duration(DELAY))
     .call(this.axis)
     .selectAll('text')
     .style('text-anchor', textAnchor)

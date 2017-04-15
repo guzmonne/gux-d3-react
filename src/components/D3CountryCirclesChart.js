@@ -4,7 +4,7 @@ import Chart from './Chart.js'
 import D3Background from './D3Background.js'
 import D3XAxis from './D3XAxis.js'
 import D3YAxis from './D3YAxis.js'
-import D3Circles from './Circles.js'
+import D3Circles from './D3Circles.js'
 
 const d3 = require('d3-array')
 
