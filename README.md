@@ -20,7 +20,7 @@ One of the main features I was looking for this charts was responsiveness. I cou
 
 By using D3 to render most of the components we loose some of React rendering advantages and control. On the other hand, building components is much simple since we are using D3 directly. I have no idea if this method leaves the door open for memory leaks, or if it impacts performance on any way. The demo example looks a little bit slugish when resizing the page, but that can probably be mitigated by throttling the component re-render.
 
-I haven't really tried to add the D3 animations API to these components to see if they fit. Hopefully I can make them work.
+Integrating D3 animations is very simple, since we just add define them using D3 API inside of the `componentDidUpdate` lifecycle method.
 
 ## Project summary
 
@@ -35,12 +35,3 @@ All the charts were created by following the code inside the "Build Interactive 
 ## Thoughts
 
 After building both sets of components I think I like more the second method. It does require a deeper knowledge of D3 but it simplifies adding the code on online examples.
-
-
-
-
-
-
-
-
-
