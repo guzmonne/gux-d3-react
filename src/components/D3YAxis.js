@@ -14,36 +14,10 @@ class D3YAxis extends React.Component {
   }
 
   componentDidUpdate() {
-    this.redraw()
+    this.draw()
   }
 
   draw = () => {
-    const {
-      yScale,
-      ticks,
-      tickSize,
-      tickPadding,
-      textAnchor,
-      textAngle,
-      textSize,
-    } = this.props
-
-    this.axis = (
-      d3.axisLeft(yScale)
-      .ticks(ticks)
-      .tickSize(tickSize)
-      .tickPadding(tickPadding)
-    )
-
-    d3.select(this.container)
-    .call(this.axis)
-    .selectAll('text')
-    .style('text-anchor', textAnchor)
-    .attr('font-size', textSize + 'px')
-    .attr('transform', `rotate(${textAngle})`)
-  }
-
-  redraw = () => {
     const {
       yScale,
       ticks,

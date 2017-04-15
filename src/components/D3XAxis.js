@@ -1,9 +1,11 @@
 import React from 'react'
 import T from 'prop-types'
+import {DELAY} from '../variables.js'
 
 const d3 = Object.assign({}, 
   require('d3-selection'),
-  require('d3-axis')
+  require('d3-axis'),
+  require('d3-transition')
 )
 
 class D3XAxis extends React.Component {
@@ -36,6 +38,7 @@ class D3XAxis extends React.Component {
 
     d3.select(this.container)
     .attr('transform', `translate(0, ${height})`)
+    .transition(d3.transition().duration(DELAY))
     .call(this.axis)
     .selectAll('text')
     .style('text-anchor', textAnchor)
